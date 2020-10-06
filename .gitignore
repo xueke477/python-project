@@ -1,0 +1,8 @@
+.ropeproject/
+bin/
+conda-meta/
+include/
+info/
+lib/
+share/
+ssl/
