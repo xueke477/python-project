@@ -57,6 +57,7 @@ def load_data(city, month, day):
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month_name
     df['day_of_week'] = df['Start Time'].dt.day_name
+    df['hour'] = df['hour'].dt.hour
 
     # filter by month if applicable
     if month != 'all':
@@ -79,22 +80,24 @@ def time_stats(df, month, day):
         (str) month - name of the month to filter by, or "all"
         (str) day - name of the day of week to filter by, or "all"
     """
-    months = ['january', 'february', 'march', 'april', 'may', 'june']
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
     if month == "all":
+        # display the most common month
         most_common_month = df.groupby('month')['month'].count().idxmax()
-        print('Most Frequent Start Hour:', popular_hour)
+        print('The Most Common Month: ' + most_common_month)
+    elif day == 'all':
+        # display the most common day of week
+        most_common_day = (df.groupby('day_of_week')['day_of_week']
+                           .count().idxmax())
+        print('The Most Common Day: ' + most_common_day)
+    elif:
+        # display the most common start hour
+        most_common_hour = (df.groupby('day_of_week')['day_of_week']
+                           .count().idxmax())
 
-    # display the most common month
-
-
-    # display the most common day of week
-
-
-    # display the most common start hour
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
