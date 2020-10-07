@@ -212,6 +212,29 @@ def user_stats(df):
     print('-'*40)
 
 
+def display_raw_data(df):
+    row_num, column_num = df.shape
+    if row_num <= 5:
+        for i in range(row_num):
+            print(df.iloc[i, :-3])
+    else:
+        block_start = 0
+        block_end = 5
+        while block_end <= row_num and block_start < block_end:
+            for i in range(block_start, block_end, 1):
+                print(df.iloc[i, :-3])
+            while True:
+                command = input('\nWould you like to see another set of ' +
+                                'records? Enter y or n.\n')
+                if command in ['y', 'n']:
+                    break
+            if command == 'n':
+                break
+            else:
+                block_start += 5
+                block_end = min(block_end+5, row_num)
+
+
 def main():
     while True:
         city, month, day = get_filters()
