@@ -33,9 +33,9 @@ def get_filters():
         month = input('Please choose among the following month to filter ' +
                       'data by:\n' +
                       'January, February, March, April, May, June,\n' +
-                      'or enter \"all\" for no filter.\n')
+                      'or enter \"none\" for no filter.\n')
         if month.strip().title() in ['January', 'February', 'March',
-                                     'April', 'May', 'June', 'All']:
+                                     'April', 'May', 'June', 'None']:
             month = month.strip().title()
             break
 
@@ -45,10 +45,10 @@ def get_filters():
                     'to filter day by:\n' +
                     'Monday, Tuesday, Wednesday, Thursday, Friday, ' +
                     'Saturday, Sunday,\n' +
-                    'or enter \"all\" for no filter.\n')
+                    'or enter \"none\" for no filter.\n')
         if day.strip().title() in ['Monday', 'Tuesday', 'Wednesday',
                                    'Thursday', 'Friday', 'Saturday',
-                                   'Sunday', 'All']:
+                                   'Sunday', 'None']:
             day = day.strip().title()
             break
 
@@ -84,12 +84,12 @@ def load_data(city, month, day):
     df['hour'] = df['Start Time'].dt.hour
 
     # filter by month if applicable
-    if month != 'All':
+    if month != 'None':
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
     # filter by day of week if applicable
-    if day != 'All':
+    if day != 'None':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day]
 
@@ -108,7 +108,7 @@ def time_stats(df, month, day):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    if month == "All" and day == 'All':
+    if month == "None" and day == 'None':
         # display the most common month
         most_common_month = df.value_counts('month').idxmax()
         print('The most common month: ' + most_common_month)
@@ -118,14 +118,14 @@ def time_stats(df, month, day):
         # display the most common start hour
         most_common_hour = (df.value_counts('hour').idxmax())
         print('The most common hour: ' + str(most_common_hour))
-    elif month == 'All' and day != 'All':
+    elif month == 'None' and day != 'None':
         # display the most common month
         most_common_month = df.value_counts('month').idxmax()
         print('The most common month: ' + most_common_month)
         # display the most common start hour
         most_common_hour = (df.value_counts('hour').idxmax())
         print('The most common hour: ' + str(most_common_hour))
-    elif month != 'All' and day == 'All':
+    elif month != 'None' and day == 'None':
         # display the most common day of week
         most_common_day = (df.value_counts('day_of_week').idxmax())
         print('The most common day: ' + most_common_day)
