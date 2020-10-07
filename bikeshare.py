@@ -23,7 +23,7 @@ def get_filters():
     # HINT: Use a while loop to handle invalid inputs
     while True:
         city = input('Please choose among the following three cities:\n' +
-                     'Chicago, New York City and Washington')
+                     'Chicago, New York City and Washington\n')
         if city.strip().lower() in ['chicago', 'new york city', 'washington']:
             city = city.strip().lower()
             break
@@ -33,7 +33,7 @@ def get_filters():
         month = input('Please choose among the following month to filter ' +
                       'data by:\n' +
                       'January, February, March, April, May, June,\n' +
-                      'or enter \"all\" for no filter.')
+                      'or enter \"all\" for no filter.\n')
         if month.strip().title() in ['January', 'February', 'March',
                                      'April', 'May', 'June', 'All']:
             month = month.strip().title()
@@ -45,7 +45,7 @@ def get_filters():
                     'to filter day by:\n' +
                     'Monday, Tuesday, Wednesday, Thursday, Friday, ' +
                     'Saturday, Sunday,\n' +
-                    'or enter \"all\" for no filter.')
+                    'or enter \"all\" for no filter.\n')
         if day.strip().title() in ['Monday', 'Tuesday', 'Wednesday',
                                    'Thursday', 'Friday', 'Saturday',
                                    'Sunday', 'All']:
@@ -222,18 +222,21 @@ def main():
                         'Enter yes or no.\n')
         if command != 'yes':
             break
+        print('-'*40)
 
         station_stats(df)
         command = input('\nWould you like to see the next set of Statistics?' +
                         'Enter yes or no.\n')
         if command != 'yes':
             break
+        print('-'*40)
 
         trip_duration_stats(df)
         command = input('\nWould you like to see the next set of Statistics?' +
                         'Enter yes or no.\n')
         if command != 'yes':
             break
+        print('-'*40)
 
         user_stats(df)
 
