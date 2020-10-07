@@ -1,13 +1,15 @@
 import pandas as pd
 
-test = pd.read_csv('chicago.csv')
+test = pd.read_csv('washington.csv')
 
-df = test.iloc[:10, :]
+df = test.iloc[:15, :]
 # [:][:10]
 print(df.columns)
 print(df)
 # print(type(df.value_counts('User Type')))
 
+print('The counts of user types is the following:')
+print(df.value_counts('User Type'))
 """
 def prompt_interaction():
     print('Would you like to see the next set of statistics? Enter y or n.')

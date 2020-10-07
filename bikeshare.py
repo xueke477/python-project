@@ -73,7 +73,7 @@ def load_data(city, month, day):
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
     # get the first 10 rows only for faster test speed
-    df = df[:][:10]
+    # df = df[:][:10]
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -157,9 +157,9 @@ def station_stats(df):
         df.value_counts(['Start Station', 'End Station']).idxmax())
     trip_count = (df.value_counts(['Start Station', 'End Station'])
                   [(most_common_route_start, most_common_route_end)])
-    print('The most common route \n' +
-          'starts at {},\n'.format(most_common_route_start) +
-          'ends at {},\n'.format(most_common_route_end) +
+    print('The most common route ' +
+          'starts at {}, '.format(most_common_route_start) +
+          'ends at {}.\n'.format(most_common_route_end) +
           'Its total number of trips is {}.'.format(trip_count))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
