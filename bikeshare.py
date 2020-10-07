@@ -238,6 +238,18 @@ def display_raw_data(df):
                 block_end = min(block_end+5, row_num)
 
 
+def break_or_not():
+    while True:
+        command = input('\nWould you like to see the next set of ' +
+                        'Statistics? Enter y or n.\n')
+        if command in ['y', 'n']:
+            break
+    if command == 'y':
+        return False
+    else:
+        return True
+
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -245,34 +257,19 @@ def main():
 
         time_stats(df, month, day)
 
-        while True:
-            command = input('\nWould you like to see the next set of ' +
-                            'Statistics? Enter y or n.\n')
-            if command in ['y', 'n']:
-                break
-        if command == 'n':
+        if break_or_not():
             break
         print('-'*40)
 
         station_stats(df)
 
-        while True:
-            command = input('\nWould you like to see the next set of ' +
-                            'Statistics? Enter y or n.\n')
-            if command in ['y', 'n']:
-                break
-        if command == 'n':
+        if break_or_not():
             break
         print('-'*40)
 
         trip_duration_stats(df)
 
-        while True:
-            command = input('\nWould you like to see the next set of ' +
-                            'Statistics? Enter y or n.\n')
-            if command in ['y', 'n']:
-                break
-        if command == 'n':
+        if break_or_not():
             break
         print('-'*40)
 
