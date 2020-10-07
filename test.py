@@ -2,9 +2,18 @@ import pandas as pd
 
 test = pd.read_csv('chicago.csv')
 
-df = test.iloc[:][:15]
-# print(df.columns)
-# print(df)
+df = test.iloc[:][:10]
+print(df.columns)
+print(df)
+# print(type(df['Trip Duration'][0]))
+
+# display total travel time
+total_time = df['Trip Duration'].sum(skipna=True)
+print('The total travel time is {} seconds.'.format(total_time))
+
+# display mean travel time
+mean_time = df['Trip Duration'].mean(skipna=True)
+print('The mean travel time is {} seconds.'.format(mean_time))
 
 """
 # most_common_route =
@@ -18,6 +27,7 @@ print('The Most Common Route: \n' +
       'Starts at: {}\n'.format(most_common_route_start) +
       'Ends at: {}\n'.format(most_common_route_end) +
       'It has a total number of {} trips'.format(trip_count))
+"""
 """
 df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -55,3 +65,4 @@ elif month != 'all' and day == 'all':
 else:
         # display the most common start hour
         most_common_hour = (df.value_counts('hour').idxmax())
+"""
