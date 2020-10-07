@@ -135,6 +135,7 @@ def time_stats(df, month, day):
     else:
         # display the most common start hour
         most_common_hour = (df.value_counts('hour').idxmax())
+        print('The most common hour: ' + str(most_common_hour))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -216,13 +217,15 @@ def display_raw_data(df):
     row_num, column_num = df.shape
     if row_num <= 5:
         for i in range(row_num):
-            print(df.iloc[i, :-3])
+            print(df.iloc[i, :-3].drop('Unnamed: 0'))
+            print('-'*60)
     else:
         block_start = 0
         block_end = 5
         while block_end <= row_num and block_start < block_end:
             for i in range(block_start, block_end, 1):
-                print(df.iloc[i, :-3])
+                print(df.iloc[i, :-3].drop('Unnamed: 0'))
+                print('-'*60)
             while True:
                 command = input('\nWould you like to see another set of ' +
                                 'records? Enter y or n.\n')
@@ -241,6 +244,7 @@ def main():
         df = load_data(city, month, day)
 
         time_stats(df, month, day)
+
         while True:
             command = input('\nWould you like to see the next set of ' +
                             'Statistics? Enter y or n.\n')
@@ -251,6 +255,7 @@ def main():
         print('-'*40)
 
         station_stats(df)
+
         while True:
             command = input('\nWould you like to see the next set of ' +
                             'Statistics? Enter y or n.\n')
@@ -261,6 +266,7 @@ def main():
         print('-'*40)
 
         trip_duration_stats(df)
+
         while True:
             command = input('\nWould you like to see the next set of ' +
                             'Statistics? Enter y or n.\n')
@@ -271,6 +277,14 @@ def main():
         print('-'*40)
 
         user_stats(df)
+
+        while True:
+            command = input('\nWould you like to see the raw records in ' +
+                            'sets of 5 rows? Enter y or n.\n')
+            if command in ['y', 'n']:
+                break
+        if command == 'y':
+            display_raw_data(df)
 
         restart = input('\nWould you like to restart? Enter y or n.\n')
         if restart.lower() != 'y':
