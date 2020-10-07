@@ -13,9 +13,9 @@ def get_filters():
 
     Returns:
         (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply
+        (str) month - name of the month to filter by, or "none" to apply
         no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply
+        (str) day - name of the day of week to filter by, or "none" to apply
         no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
@@ -28,7 +28,7 @@ def get_filters():
             city = city.strip().lower()
             break
 
-    # get user input for month (all, january, february, ... , june)
+    # get user input for month (none, january, february, ... , june)
     while True:
         month = input('Please choose among the following month to filter ' +
                       'data by:\n' +
@@ -39,7 +39,7 @@ def get_filters():
             month = month.strip().title()
             break
 
-    # get user input for day of week (all, monday, tuesday, ... sunday)
+    # get user input for day of week (none, monday, tuesday, ... sunday)
     while True:
         day = input('Please choose among the following days of week ' +
                     'to filter day by:\n' +
@@ -63,9 +63,9 @@ def load_data(city, month, day):
 
     Args:
         (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply
+        (str) month - name of the month to filter by, or "none" to apply
         no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply
+        (str) day - name of the day of week to filter by, or "none" to apply
         no day filter
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
@@ -101,8 +101,8 @@ def time_stats(df, month, day):
     Output depends on month and day.
 
     Args:
-        (str) month - name of the month to filter by, or "all"
-        (str) day - name of the day of week to filter by, or "all"
+        (str) month - name of the month to filter by, or "none"
+        (str) day - name of the day of week to filter by, or "none"
     """
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
@@ -159,7 +159,7 @@ def station_stats(df):
     trip_count = (df.value_counts(['Start Station', 'End Station'])
                   [(most_common_route_start, most_common_route_end)])
     print('The most common route ' +
-          'starts at {}, '.format(most_common_route_start) +
+          'starts at {} and '.format(most_common_route_start) +
           'ends at {}.\n'.format(most_common_route_end) +
           'Its total number of trips is {}.'.format(trip_count))
 
@@ -195,12 +195,13 @@ def user_stats(df):
     print('The counts of user types is the following:')
     print(df.value_counts('User Type'))
 
-    # Display counts of genders
+    # Display counts of genders if applicable
     if 'Gender' in df.columns:
         print('The counts of user genders is the following:')
         print(df.value_counts('Gender'))
 
-    # Display earliest, most recent, and most common year of birth
+    # Display earliest, most recent, and most common year of birth if
+    # applicable
     if 'Birth Year' in df.columns:
         min_birth_year = df['Birth Year'].min()
         print('The earliest birth year is {}.'.format(min_birth_year))
@@ -214,12 +215,19 @@ def user_stats(df):
 
 
 def display_raw_data(df):
+    """Displays the raw record by sets of 5 rows.
+    Requires prompt input for more records.
+    """
+
+    # get the number of rows of the DataFrame
     row_num, column_num = df.shape
+    # print every row if the number of rows is <= 5
     if row_num <= 5:
         for i in range(row_num):
             print(df.iloc[i, :-3].drop('Unnamed: 0'))
             print('-'*60)
     else:
+        # print 5 rows and ask if more are need
         block_start = 0
         block_end = 5
         while block_end <= row_num and block_start < block_end:
@@ -239,6 +247,12 @@ def display_raw_data(df):
 
 
 def break_or_not():
+    """Decides whether to break the while loop in main().
+
+    Returns:
+        False if not break
+        True if break
+    """
     while True:
         command = input('\nWould you like to see the next set of ' +
                         'Statistics? Enter y or n.\n')
@@ -257,24 +271,28 @@ def main():
 
         time_stats(df, month, day)
 
+        # Asks whether to display another set of stats
         if break_or_not():
             break
         print('-'*40)
 
         station_stats(df)
 
+        # Asks whether to display another set of stats
         if break_or_not():
             break
         print('-'*40)
 
         trip_duration_stats(df)
 
+        # Asks whether to display another set of stats
         if break_or_not():
             break
         print('-'*40)
 
         user_stats(df)
 
+        # Asks whether to display raw records
         while True:
             command = input('\nWould you like to see the raw records in ' +
                             'sets of 5 rows? Enter y or n.\n')
@@ -283,6 +301,7 @@ def main():
         if command == 'y':
             display_raw_data(df)
 
+        # Asks whether to restart
         restart = input('\nWould you like to restart? Enter y or n.\n')
         if restart.lower() != 'y':
             break
