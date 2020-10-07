@@ -5,8 +5,29 @@ test = pd.read_csv('chicago.csv')
 df = test.iloc[:][:10]
 print(df.columns)
 print(df)
+# print(type(df.value_counts('User Type')))
+# print(df.value_counts('User Type'))
 # print(type(df['Trip Duration'][0]))
+    # Display counts of user types
+print('The counts of user types is the following:')
+print(df.value_counts('User Type'))
 
+# Display counts of genders
+if 'Gender' in df.columns:
+        print('The counts of user genders is the following:')
+        print(df.value_counts('Gender'))
+
+# Display earliest, most recent, and most common year of birth
+if 'Birth Year' in df.columns:
+        min_birth_year = df['Birth Year'].min()
+        print('The earliest birth year is {}.'.format(min_birth_year))
+        recent_birth_year = df['Birth Year'].max()
+        print('The most recent birth year is {}'.format(recent_birth_year))
+        common_birth_year = df.value_counts('Birth Year').idxmax()
+        print('The most common birth year is {}'.format(common_birth_year))
+
+
+"""
 # display total travel time
 total_time = df['Trip Duration'].sum(skipna=True)
 print('The total travel time is {} seconds.'.format(total_time))
@@ -14,7 +35,7 @@ print('The total travel time is {} seconds.'.format(total_time))
 # display mean travel time
 mean_time = df['Trip Duration'].mean(skipna=True)
 print('The mean travel time is {} seconds.'.format(mean_time))
-
+"""
 """
 # most_common_route =
 most_common_route_start, most_common_route_end = (
