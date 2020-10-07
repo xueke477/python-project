@@ -1,6 +1,6 @@
 import time
 import pandas as pd
-import numpy as np
+# import numpy as np
 
 CITY_DATA = {'chicago': 'chicago.csv',
              'new york city': 'new_york_city.csv',
@@ -21,14 +21,36 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington).
     # HINT: Use a while loop to handle invalid inputs
-
-
+    while True:
+        city = input('Please choose among the following three cities:\n' +
+                     'Chicago, New York City and Washington')
+        if city.strip().lower() in ['chicago', 'new york city', 'washington']:
+            city = city.strip().lower()
+            break
 
     # get user input for month (all, january, february, ... , june)
-
+    while True:
+        month = input('Please choose among the following month to filter ' +
+                      'data by:\n' +
+                      'January, February, March, April, May, June,\n' +
+                      'or enter \"all\" for no filter.')
+        if month.strip().title() in ['January', 'February', 'March',
+                                     'April', 'May', 'June', 'All']:
+            month = month.strip().title()
+            break
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-
+    while True:
+        day = input('Please choose among the following days of week ' +
+                    'to filter day by:\n' +
+                    'Monday, Tuesday, Wednesday, Thursday, Friday, ' +
+                    'Saturday, Sunday,\n' +
+                    'or enter \"all\" for no filter.')
+        if day.strip().title() in ['Monday', 'Tuesday', 'Wednesday',
+                                   'Thursday', 'Friday', 'Saturday',
+                                   'Sunday', 'All']:
+            day = day.strip().title()
+            break
 
     print('-'*40)
     return city, month, day
@@ -49,7 +71,7 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     # load data file into a dataframe
-    df = pd.read_csv(CITY_DATA[city.lower()])
+    df = pd.read_csv(CITY_DATA[city])
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -60,12 +82,12 @@ def load_data(city, month, day):
     df['hour'] = df['Start Time'].dt.hour
 
     # filter by month if applicable
-    if month != 'all':
+    if month != 'All':
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
     # filter by day of week if applicable
-    if day != 'all':
+    if day != 'All':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day]
 
@@ -84,7 +106,7 @@ def time_stats(df, month, day):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    if month == "all" and day == 'all':
+    if month == "All" and day == 'All':
         # display the most common month
         most_common_month = df.value_counts('month').idxmax()
         print('The most common month: ' + most_common_month)
@@ -94,14 +116,14 @@ def time_stats(df, month, day):
         # display the most common start hour
         most_common_hour = (df.value_counts('hour').idxmax())
         print('The most common hour: ' + str(most_common_hour))
-    elif month == 'all' and day != 'all':
+    elif month == 'All' and day != 'All':
         # display the most common month
         most_common_month = df.value_counts('month').idxmax()
         print('The most common month: ' + most_common_month)
         # display the most common start hour
         most_common_hour = (df.value_counts('hour').idxmax())
         print('The most common hour: ' + str(most_common_hour))
-    elif month != 'all' and day == 'all':
+    elif month != 'All' and day == 'All':
         # display the most common day of week
         most_common_day = (df.value_counts('day_of_week').idxmax())
         print('The most common day: ' + most_common_day)
@@ -219,4 +241,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+    main()
