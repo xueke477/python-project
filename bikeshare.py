@@ -55,34 +55,38 @@ def load_data(city, month, day):
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract month and day of week from Start Time to create new columns
-    df['month'] = [x.month for x in df['Start Time']]
-    df['day_of_week'] = [x.weekday() for x in df['Start Time']]
+    df['month'] = df['Start Time'].dt.month_name
+    df['day_of_week'] = df['Start Time'].dt.day_name
 
     # filter by month if applicable
     if month != 'all':
-        # use the index of the months list to get the corresponding int
-        months = ['january', 'february', 'march', 'april', 'may', 'june']
-        month = months.index(month)+1
-
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
-        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                'Friday', 'Saturday', 'Sunday']
-        day = days.index(day.title())
         df = df[df['day_of_week'] == day]
 
     return df
 
 
-def time_stats(df):
-    """Displays statistics on the most frequent times of travel."""
+def time_stats(df, month, day):
+    """Displays statistics on the most frequent times of travel.
+    Output depends on month and day.
+
+    Args:
+        (str) month - name of the month to filter by, or "all"
+        (str) day - name of the day of week to filter by, or "all"
+    """
+    months = ['january', 'february', 'march', 'april', 'may', 'june']
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
+
+    if month == "all":
+        most_common_month = df.groupby('month')['month'].count().idxmax()
+        print('Most Frequent Start Hour:', popular_hour)
 
     # display the most common month
 
@@ -156,7 +160,7 @@ def main():
         city, month, day = get_filters()
         df = load_data(city, month, day)
 
-        time_stats(df)
+        time_stats(df, month, day)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
