@@ -194,8 +194,23 @@ def main():
         df = load_data(city, month, day)
 
         time_stats(df, month, day)
+        command = input('\nWould you like to see the next set of Statistics?' +
+                        'Enter yes or no.\n')
+        if command != 'yes':
+            break
+
         station_stats(df)
+        command = input('\nWould you like to see the next set of Statistics?' +
+                        'Enter yes or no.\n')
+        if command != 'yes':
+            break
+
         trip_duration_stats(df)
+        command = input('\nWould you like to see the next set of Statistics?' +
+                        'Enter yes or no.\n')
+        if command != 'yes':
+            break
+
         user_stats(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
