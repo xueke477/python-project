@@ -1,3 +1,6 @@
+print('JAnuary'.title())
+
+"""
 import pandas as pd
 
 test = pd.read_csv('washington.csv')
@@ -13,6 +16,7 @@ print(type(df.iloc[0, :-3]))
 print(df.iloc[0, :-3])
 # print(df)
 # print(type(df.value_counts('User Type')))
+"""
 """
 print('The counts of user types is the following:')
 print(df.value_counts('User Type'))
