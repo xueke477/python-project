@@ -54,10 +54,10 @@ def load_data(city, month, day):
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
-    # extract month and day of week from Start Time to create new columns
-    df['month'] = df['Start Time'].dt.month_name
-    df['day_of_week'] = df['Start Time'].dt.day_name
-    df['hour'] = df['hour'].dt.hour
+    # extract month, day of week and hour from Start Time to create new columns
+    df['month'] = df['Start Time'].dt.month_name()
+    df['day_of_week'] = df['Start Time'].dt.day_name()
+    df['hour'] = df['Start Time'].dt.hour
 
     # filter by month if applicable
     if month != 'all':
@@ -84,21 +84,39 @@ def time_stats(df, month, day):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    if month == "all":
+    if month == "all" and day == 'all':
         # display the most common month
         most_common_month = df.groupby('month')['month'].count().idxmax()
         print('The Most Common Month: ' + most_common_month)
-    elif day == 'all':
         # display the most common day of week
         most_common_day = (df.groupby('day_of_week')['day_of_week']
                            .count().idxmax())
         print('The Most Common Day: ' + most_common_day)
-    elif:
         # display the most common start hour
-        most_common_hour = (df.groupby('day_of_week')['day_of_week']
+        most_common_hour = (df.groupby('hour')['hour']
                            .count().idxmax())
-
-
+        print('The Most Common Hour: ' + str(most_common_hour))
+    elif month == 'all' and day != 'all':
+        # display the most common month
+        most_common_month = df.groupby('month')['month'].count().idxmax()
+        print('The Most Common Month: ' + most_common_month)
+        # display the most common start hour
+        most_common_hour = (df.groupby('hour')['hour']
+                           .count().idxmax())
+        print('The Most Common Hour: ' + str(most_common_hour))
+    elif month != 'all' and day == 'all':
+        # display the most common day of week
+        most_common_day = (df.groupby('day_of_week')['day_of_week']
+                           .count().idxmax())
+        print('The Most Common Day: ' + most_common_day)
+        # display the most common start hour
+        most_common_hour = (df.groupby('hour')['hour']
+                           .count().idxmax())
+        print('The Most Common Hour: ' + str(most_common_hour))
+    else:
+        # display the most common start hour
+        most_common_hour = (df.groupby('hour')['hour']
+                           .count().idxmax())
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)

@@ -1,32 +1,49 @@
 import pandas as pd
 
-df = pd.read_csv('chicago.csv')
+test = pd.read_csv('chicago.csv')
 
-test = df.iloc[:][:10]
+df = test.iloc[:][:10]
 
-test['Start Time'] = pd.to_datetime(test['Start Time'])
+df['Start Time'] = pd.to_datetime(df['Start Time'])
 
-test['month'] = [x.month for x in test['Start Time']]
-test['day_of_week'] = [x.weekday() for x in test['Start Time']]
+df['month'] = df['Start Time'].dt.month_name()
+df['day_of_week'] = df['Start Time'].dt.day_name()
+df['hour'] = df['Start Time'].dt.hour
 
-print(test.loc[test['month'] == 4, ['Start Time', 'month', 'day_of_week']])
+month = 'all'
+day = 'all'
 
-"""
-CITY_DATA = { 'chicago': 'chicago.csv',
-              'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
-print(CITY_DATA['Chicago'.lower()])
+if month == "all" and day == 'all':
+        # display the most common month
+        most_common_month = df.groupby('month')['month'].count().idxmax()
+        print('The Most Common Month: ' + most_common_month)
+        # display the most common day of week
+        most_common_day = (df.groupby('day_of_week')['day_of_week']
+                           .count().idxmax())
+        print('The Most Common Day: ' + most_common_day)
+        # display the most common start hour
+        most_common_hour = (df.groupby('hour')['hour']
+                           .count().idxmax())
+        print('The Most Common Hour: ' + str(most_common_hour))
+elif month == 'all' and day != 'all':
+        # display the most common month
+        most_common_month = df.groupby('month')['month'].count().idxmax()
+        print('The Most Common Month: ' + most_common_month)
+        # display the most common start hour
+        most_common_hour = (df.groupby('hour')['hour']
+                           .count().idxmax())
+        print('The Most Common Hour: ' + str(most_common_hour))
+elif month != 'all' and day == 'all':
+        # display the most common day of week
+        most_common_day = (df.groupby('day_of_week')['day_of_week']
+                           .count().idxmax())
+        print('The Most Common Day: ' + most_common_day)
+        # display the most common start hour
+        most_common_hour = (df.groupby('hour')['hour']
+                           .count().idxmax())
+        print('The Most Common Hour: ' + str(most_common_hour))
+else:
+        # display the most common start hour
+        most_common_hour = (df.groupby('hour')['hour']
+                           .count().idxmax())
 
-month = "march"
-print(type(month))
-print(month)
-
-month = 3
-print(type(month))
-print(month)
-
-month = month == 4
-print(type(month))
-print(month)
-
-"""
