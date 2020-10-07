@@ -72,6 +72,8 @@ def load_data(city, month, day):
     """
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
+    # get the first 10 rows only for faster test speed
+    df = df[:][:10]
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
