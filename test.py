@@ -1,22 +1,23 @@
-print('JAnuary'.title())
-
-"""
 import pandas as pd
 
-test = pd.read_csv('washington.csv')
+df = pd.read_csv('chicago.csv')
 
-df = test[:][:10]
+# df = test[:][:10]
+
 df['Start Time'] = pd.to_datetime(df['Start Time'])
 df['month'] = df['Start Time'].dt.month_name()
 df['day_of_week'] = df['Start Time'].dt.day_name()
 df['hour'] = df['Start Time'].dt.hour
 
-print(df.columns)
-print(type(df.iloc[0, :-3]))
-print(df.iloc[0, :-3])
+row_index = df['Birth Year'].idxmin()
+print(df.iloc[row_index, :-3])
+
+
+# print(df.columns)
+# print(type(df.iloc[0, :-3]))
+# print(df.iloc[0, :-3])
 # print(df)
 # print(type(df.value_counts('User Type')))
-"""
 """
 print('The counts of user types is the following:')
 print(df.value_counts('User Type'))
