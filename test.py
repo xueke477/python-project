@@ -4,7 +4,6 @@ test = pd.read_csv('chicago.csv')
 
 df = test[:][:10]
 
-"""
 df['Start Time'] = pd.to_datetime(df['Start Time'])
 df['month'] = df['Start Time'].dt.month_name()
 df['day_of_week'] = df['Start Time'].dt.day_name()
@@ -12,7 +11,6 @@ df['hour'] = df['Start Time'].dt.hour
 
 row_index = df['Birth Year'].idxmin()
 print(df.iloc[row_index, :-3])
-"""
 
 # print(df.columns)
 # print(type(df.iloc[0, :-3]))
