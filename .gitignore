@@ -1,4 +1,6 @@
-test.py
+./test.py
+*.un~
+*~
 *.swp
 .ropeproject/
 bin/
