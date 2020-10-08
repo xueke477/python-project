@@ -1,4 +1,4 @@
-name: python-project
+name: environment
 channels:
   - defaults
 dependencies:
