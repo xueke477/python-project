@@ -14,4 +14,27 @@ There are two options to run the script.
 bikeshare.py` from that directory in Shell.
 
     python=3.6.12
+
     pandas=1.1.2
+
+2. Follow the folllowing steps to clone the repo and use Anaconda to create a virtual environment.
+
+# Installation
+
+First clone the repo.
+
+	cd ~
+	git clone https://github.com/xueke477/python-project.git
+	cd python-project
+
+Then use Anaconda to install the virtual environment.
+
+	conda env create
+
+Activate the virtual environment.
+
+	conda activate environment
+
+Finally run the Python script.
+
+	python bikeshare.py
