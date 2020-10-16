@@ -1,13 +1,15 @@
 # Explore US Bikeshare Data
 
-This project investigates the bike share use in Chicago, New York City and
+This project investigates the bikeshare data in Chicago, New York City and
 Washington D.C. by computing a set of descriptive statistics. It also creates
-an interactive experience in the terminal via Pyhon scripting. 
+an interactive experience in the terminal via Python scripting. 
 
-There are two options to run the script.
+There are two ways to run the script.
 
-1. Make sure you have the following versions of Python and key modules on your
-   computer. Download `bikeshare.py`, `chicago.csv`, `new_york_city.csv` and
+### Manually
+
+Make sure you have the following versions of Python and key modules on your 
+computer. Download `bikeshare.py`, `chicago.csv`, `new_york_city.csv` and
 `washington.csv` into a directory and simpy run the command  `python
 bikeshare.py` from that directory in Shell.
 
@@ -15,24 +17,26 @@ bikeshare.py` from that directory in Shell.
 
     pandas=1.1.2
 
-2. Follow the folllowing steps to clone the repo and use Anaconda to create a virtual environment.
+### Anaconda
 
-# Install and Run
+Follow the folllowing steps to clone the repo and use Anaconda to create a virtual environment.
 
-First clone the repo.
+1. Clone the repo.
 
-	cd ~
-	git clone https://github.com/xueke477/python-project.git
-	cd python-project
+       cd ~
 
-Then use Anaconda to install the virtual environment.
+       git clone https://github.com/xueke477/python-project.git
 
-	conda env create
+       cd python-project
 
-Activate the virtual environment.
+2. Use Anaconda to install the virtual environment.
 
-	conda activate environment
+       conda env create
 
-Finally run the Python script.
+3. Activate the virtual environment.
 
-	python bikeshare.py
+       conda activate environment
+
+4. Run the Python script.
+
+       python bikeshare.py
