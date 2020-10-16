@@ -40,3 +40,6 @@ Follow the folllowing steps to clone the repo and use Anaconda to create a virtu
 4. Run the Python script.
 
        python bikeshare.py
+
+#### Credits
+This project is part of the course work of the Udacity Nanodegree Program "Programming for Data Science with Python".
