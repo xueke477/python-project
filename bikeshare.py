@@ -20,35 +20,35 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington).
-    # HINT: Use a while loop to handle invalid inputs
+    three_cities = ('Chicago', 'New York City', 'Washington')
     while True:
-        city = input('Please choose among the following three cities:\n' +
-                     'Chicago, New York City and Washington\n')
-        if city.strip().lower() in ['chicago', 'new york city', 'washington']:
+        city = input('Please choose among the following three cities:\n'
+                     + ', '.join(three_cities) + '.\n')
+        if city.strip().title() in three_cities:
             city = city.strip().lower()
             break
 
     # get user input for month (none, january, february, ... , june)
+    six_months_and_none = ('January', 'February', 'March', 'April', 'May',
+                           'June', 'None')
     while True:
-        month = input('Please choose among the following month to filter ' +
-                      'data by:\n' +
-                      'January, February, March, April, May, June,\n' +
-                      'or enter \"none\" for no filter.\n')
-        if month.strip().title() in ['January', 'February', 'March',
-                                     'April', 'May', 'June', 'None']:
+        month = input('Please choose among the following months to filter '
+                      + 'data by:\n'
+                      + ', '.join(six_months_and_none[:-1])
+                      + ',\nor enter \"none\" for no filter.\n')
+        if month.strip().title() in six_months_and_none:
             month = month.strip().title()
             break
 
     # get user input for day of week (none, monday, tuesday, ... sunday)
+    days_and_none = ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+                     'Saturday', 'Sunday', 'None')
     while True:
-        day = input('Please choose among the following days of week ' +
-                    'to filter day by:\n' +
-                    'Monday, Tuesday, Wednesday, Thursday, Friday, ' +
-                    'Saturday, Sunday,\n' +
-                    'or enter \"none\" for no filter.\n')
-        if day.strip().title() in ['Monday', 'Tuesday', 'Wednesday',
-                                   'Thursday', 'Friday', 'Saturday',
-                                   'Sunday', 'None']:
+        day = input('Please choose among the following days of week '
+                    + 'to filter day by:\n'
+                    + ', '.join(days_and_none[:-1])
+                    + ',\nor enter \"none\" for no filter.\n')
+        if day.strip().title() in days_and_none:
             day = day.strip().title()
             break
 
@@ -158,10 +158,10 @@ def station_stats(df):
         df.value_counts(['Start Station', 'End Station']).idxmax())
     trip_count = (df.value_counts(['Start Station', 'End Station'])
                   [(most_common_route_start, most_common_route_end)])
-    print('The most common route ' +
-          'starts at {} and '.format(most_common_route_start) +
-          'ends at {}.\n'.format(most_common_route_end) +
-          'Its total number of trips is {}.'.format(trip_count))
+    print('The most common route '
+          + 'starts at {} and '.format(most_common_route_start)
+          + 'ends at {}.\n'.format(most_common_route_end)
+          + 'Its total number of trips is {}.'.format(trip_count))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -235,8 +235,8 @@ def display_raw_data(df):
                 print(df.iloc[i, :-3].drop('Unnamed: 0'))
                 print('-'*60)
             while True:
-                command = input('\nWould you like to see another set of ' +
-                                'records? Enter y or n.\n')
+                command = input('\nWould you like to see another set of '
+                                + 'records? Enter y or n.\n')
                 if command in ['y', 'n']:
                     break
             if command == 'n':
@@ -254,8 +254,8 @@ def break_or_not():
         True if break
     """
     while True:
-        command = input('\nWould you like to see the next set of ' +
-                        'Statistics? Enter y or n.\n')
+        command = input('\nWould you like to see the next set of '
+                        + 'Statistics? Enter y or n.\n')
         if command in ['y', 'n']:
             break
     if command == 'y':
@@ -294,8 +294,8 @@ def main():
 
         # Asks whether to display raw records
         while True:
-            command = input('\nWould you like to see the raw records in ' +
-                            'sets of 5 rows? Enter y or n.\n')
+            command = input('\nWould you like to see the raw records in '
+                            + 'sets of 5 rows? Enter y or n.\n')
             if command in ['y', 'n']:
                 break
         if command == 'y':
